@@ -16,3 +16,7 @@ ThemeData homeScreenTheme = ThemeData(
     indicatorColor: Colors.transparent,
   ),
 );
+
+ThemeData onBoardScreenOneTheme = ThemeData(
+  textTheme: GoogleFonts.robotoTextTheme(),
+);

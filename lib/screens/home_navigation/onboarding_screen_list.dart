@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import '../onboarding/onboarding_screen_one.dart';
 
 class OnboardingScreenList extends StatelessWidget {
   const OnboardingScreenList({super.key});
+
+  void _selectedOnboard(BuildContext context, String key) {
+    if (key == "ScreenOne") {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const OnboardingScreenOne(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +34,12 @@ class OnboardingScreenList extends StatelessWidget {
             height: 20,
           ),
           ...dataList
-              .map((obj) => OnboardingScreenDetailCard(object: obj))
+              .map((obj) => OnboardingScreenDetailCard(
+                    object: obj,
+                    onSelectedOnboard: () {
+                      _selectedOnboard(context, obj.title);
+                    },
+                  ))
               .toList()
         ],
       ),
@@ -32,76 +48,81 @@ class OnboardingScreenList extends StatelessWidget {
 }
 
 class OnboardingScreenDetailCard extends StatelessWidget {
-  const OnboardingScreenDetailCard({super.key, required this.object});
+  const OnboardingScreenDetailCard(
+      {super.key, required this.object, required this.onSelectedOnboard});
 
   final OnboardingScreen object;
+  final void Function() onSelectedOnboard;
 
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return Card(
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image.network(
-              width: 150,
-              object.imageUrl,
+    return InkWell(
+      onTap: onSelectedOnboard,
+      child: Card(
+        elevation: 0,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.network(
+                width: 150,
+                object.imageUrl,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  object.title,
-                  style: themeData.textTheme.titleLarge,
-                ),
-                Text(
-                  object.subTitle,
-                  style: themeData.textTheme.labelMedium!
-                      .copyWith(color: Colors.grey.shade500),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  '${object.slides} Slides',
-                  style: themeData.textTheme.labelLarge!.copyWith(),
-                ),
-                const SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: object.tags
-                      .map(
-                        (t) => Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 1.7),
-                          margin: const EdgeInsets.only(right: 4),
-                          decoration: BoxDecoration(
-                              color: Colors.green.shade100,
-                              borderRadius: BorderRadius.circular(3)),
-                          child: Text(
-                            t,
-                            style: themeData.textTheme.labelMedium!.copyWith(
-                              color: Colors.green.shade700,
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    object.title,
+                    style: themeData.textTheme.titleLarge,
+                  ),
+                  Text(
+                    object.subTitle,
+                    style: themeData.textTheme.labelMedium!
+                        .copyWith(color: Colors.grey.shade500),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    '${object.slides} Slides',
+                    style: themeData.textTheme.labelLarge!.copyWith(),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Row(
+                    children: object.tags
+                        .map(
+                          (t) => Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 1.7),
+                            margin: const EdgeInsets.only(right: 4),
+                            decoration: BoxDecoration(
+                                color: Colors.green.shade100,
+                                borderRadius: BorderRadius.circular(3)),
+                            child: Text(
+                              t,
+                              style: themeData.textTheme.labelMedium!.copyWith(
+                                color: Colors.green.shade700,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                )
-              ],
-            ),
-          )
-        ],
+                        )
+                        .toList(),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -124,7 +145,7 @@ class OnboardingScreen {
 
 List<OnboardingScreen> dataList = const [
   OnboardingScreen(
-    title: 'Title One',
+    title: 'ScreenOne',
     subTitle: 'Onboarding Screen sub title which is long and will more long',
     imageUrl:
         'https://cdn.dribbble.com/users/4208985/screenshots/15797352/media/cbeda99751314125e53dd9aab55b0914.png?compress=1&resize=1000x750&vertical=center',

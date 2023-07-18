@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../onboarding/onboarding_screen_one.dart';
+import '../onboarding/onboarding_screen_two.dart';
 
 class OnboardingScreenList extends StatelessWidget {
   const OnboardingScreenList({super.key});
@@ -9,6 +10,12 @@ class OnboardingScreenList extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => const OnboardingScreenOne(),
+        ),
+      );
+    } else if (key == "ScreenTwo") {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const OnboardingScreenTwo(),
         ),
       );
     }
@@ -161,7 +168,7 @@ List<OnboardingScreen> dataList = const [
     tags: ['Animated'],
   ),
   OnboardingScreen(
-    title: 'Title Three',
+    title: 'ScreenTwo',
     subTitle: 'Onboarding Screen sub title which is long and will more long',
     imageUrl:
         'https://cdn.dribbble.com/users/1192538/screenshots/16817721/media/5550fe7c1c053e1031c2a293286a1da7.png?compress=1&resize=1000x750&vertical=center',

@@ -20,3 +20,8 @@ ThemeData homeScreenTheme = ThemeData(
 ThemeData onBoardScreenOneTheme = ThemeData(
   textTheme: GoogleFonts.robotoTextTheme(),
 );
+
+ThemeData onBoardScreenTwoTheme = ThemeData.from(
+  colorScheme: const ColorScheme.light(),
+  textTheme: GoogleFonts.rubikTextTheme(),
+);

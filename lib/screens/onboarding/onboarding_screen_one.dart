@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:go_router/go_router.dart';
 
 import '../../theme.dart';
 
@@ -121,7 +122,7 @@ class _OnboardingScreenOne extends State<OnboardingScreenOne> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      context.pop();
                     },
                     child: Text(
                       "Skip",

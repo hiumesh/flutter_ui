@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../theme.dart';
 
 class OnboardingScreenTwo extends StatefulWidget {
@@ -68,7 +70,7 @@ class _OnboardingScreenTwo extends State<OnboardingScreenTwo> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              context.pop();
                             },
                             child: const Text(
                               'Skip',

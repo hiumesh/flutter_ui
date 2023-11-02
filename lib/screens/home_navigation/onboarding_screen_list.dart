@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
-import '../onboarding/onboarding_screen_one.dart';
-import '../onboarding/onboarding_screen_two.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardingScreenList extends StatelessWidget {
   const OnboardingScreenList({super.key});
 
-  void _selectedOnboard(BuildContext context, String key) {
-    if (key == "ScreenOne") {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => const OnboardingScreenOne(),
-        ),
-      );
-    } else if (key == "ScreenTwo") {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => const OnboardingScreenTwo(),
-        ),
-      );
-    }
+  void _selectedOnboard(BuildContext context, String url) {
+    context.push(url);
   }
 
   @override
@@ -44,7 +31,7 @@ class OnboardingScreenList extends StatelessWidget {
               .map((obj) => OnboardingScreenDetailCard(
                     object: obj,
                     onSelectedOnboard: () {
-                      _selectedOnboard(context, obj.title);
+                      _selectedOnboard(context, obj.url);
                     },
                   ))
               .toList()
@@ -138,12 +125,14 @@ class OnboardingScreenDetailCard extends StatelessWidget {
 class OnboardingScreen {
   const OnboardingScreen({
     required this.title,
+    required this.url,
     required this.subTitle,
     required this.imageUrl,
     required this.slides,
     required this.tags,
   });
   final String title;
+  final String url;
   final String subTitle;
   final String imageUrl;
   final int slides;
@@ -153,6 +142,7 @@ class OnboardingScreen {
 List<OnboardingScreen> dataList = const [
   OnboardingScreen(
     title: 'ScreenOne',
+    url: "/onboarding_one",
     subTitle: 'Onboarding Screen sub title which is long and will more long',
     imageUrl:
         'https://cdn.dribbble.com/users/4208985/screenshots/15797352/media/cbeda99751314125e53dd9aab55b0914.png?compress=1&resize=1000x750&vertical=center',
@@ -161,58 +151,11 @@ List<OnboardingScreen> dataList = const [
   ),
   OnboardingScreen(
     title: 'Title Two',
+    url: '/onboarding_two',
     subTitle: 'Onboarding Screen sub title which is long and will more long',
     imageUrl:
         'https://cdn.dribbble.com/users/2113704/screenshots/14936270/media/100c42747dece9e5ec9535e2c169692a.png?compress=1&resize=1000x750&vertical=center',
     slides: 3,
     tags: ['Animated'],
-  ),
-  OnboardingScreen(
-    title: 'ScreenTwo',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/users/1192538/screenshots/16817721/media/5550fe7c1c053e1031c2a293286a1da7.png?compress=1&resize=1000x750&vertical=center',
-    slides: 2,
-    tags: ['Animated', 'Large'],
-  ),
-  OnboardingScreen(
-    title: 'Title Three',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/userupload/8167665/file/original-0c8f2fa330830d77a05e1f5e6159aa6a.jpeg?compress=1&resize=1200x900',
-    slides: 5,
-    tags: ['Animated', 'Large'],
-  ),
-  OnboardingScreen(
-    title: 'Title One',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/users/4208985/screenshots/15797352/media/cbeda99751314125e53dd9aab55b0914.png?compress=1&resize=1000x750&vertical=center',
-    slides: 4,
-    tags: ['Animated', 'Cool'],
-  ),
-  OnboardingScreen(
-    title: 'Title Two',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/users/2113704/screenshots/14936270/media/100c42747dece9e5ec9535e2c169692a.png?compress=1&resize=1000x750&vertical=center',
-    slides: 3,
-    tags: ['Animated'],
-  ),
-  OnboardingScreen(
-    title: 'Title Three',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/users/1192538/screenshots/16817721/media/5550fe7c1c053e1031c2a293286a1da7.png?compress=1&resize=1000x750&vertical=center',
-    slides: 2,
-    tags: ['Animated', 'Large'],
-  ),
-  OnboardingScreen(
-    title: 'Title Three',
-    subTitle: 'Onboarding Screen sub title which is long and will more long',
-    imageUrl:
-        'https://cdn.dribbble.com/userupload/8167665/file/original-0c8f2fa330830d77a05e1f5e6159aa6a.jpeg?compress=1&resize=1200x900',
-    slides: 5,
-    tags: ['Animated', 'Large'],
   ),
 ];

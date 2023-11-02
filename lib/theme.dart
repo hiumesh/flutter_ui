@@ -21,7 +21,12 @@ ThemeData onBoardScreenOneTheme = ThemeData(
   textTheme: GoogleFonts.robotoTextTheme(),
 );
 
-ThemeData onBoardScreenTwoTheme = ThemeData.from(
+ThemeData onBoardScreenTwoTheme = ThemeData(
   colorScheme: const ColorScheme.light(),
   textTheme: GoogleFonts.rubikTextTheme(),
+);
+
+ThemeData formScreenOneTheme = ThemeData(
+  textTheme: GoogleFonts.robotoTextTheme(),
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF136AF3)),
 );
